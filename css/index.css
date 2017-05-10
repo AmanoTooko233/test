@@ -1,0 +1,235 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+.clearfix{overflow:hidden;_zoom:1;}
+a,a:hover,a:focus{
+	text-decoration: none;
+}
+ul,li{
+	list-style: none;
+}
+header{
+	width: 100%;
+	height: 50px;
+	background-color: orange;
+}
+header .logoleft{
+	float: left;
+	width: 75%;
+}
+header .logoleft a{
+	display: block;
+	height: 50px;
+	margin-left: 5px;
+}
+header .logoleft img{
+	height: 25px;	
+	margin-top: 14px;
+	
+}
+header .logoright{
+	float: right;
+	width: 25%;
+}
+header .logoright a{
+	display: block;
+	float: right;
+	margin-right: 5px;
+}
+header .logoright a img{
+	height: 34px;
+	margin-top: 10px;
+}
+
+.serach{
+	width: 100%;
+	height: 31px;
+	padding: 10px 0;
+	position: relative;
+}
+.serach input{
+	width: 90%;
+	display: block;
+	height: 30px;
+	border: none;
+	background: #f1f1f1;
+	border-radius: 15px;
+	padding-left: 15px;
+	line-height: 30px;
+	outline: none;
+	margin-left: 10px;
+}
+.serach a{
+	display: block;
+	width: 63px;
+	height: 30px;
+	text-align: center;
+	background-color: orange;
+	color: white;
+	border-radius: 15px;
+	line-height: 30px;
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+.menu{
+	width: 100%;
+	border-top: 1px solid #333333;
+}
+/*.menu .mrow{
+	margin: 16px 0;
+}*/
+.menu .item{
+	width: 25%;
+	float: left;
+	margin: 16px 0;
+	
+}
+.menu .item a{
+	display: block;
+	
+}
+.menu .item a img{
+	width: 50px;
+	display: block;
+	margin: 0 auto;
+}
+.menu .item a .name{
+	font-size: 12px;
+	color: #5a5a5a;
+	text-align: center;
+}
+
+.discount{
+	max-width: 100%;
+	padding: 10px 0;
+}
+.discount .title{
+	display: block;
+	width: 100%;
+	height: 36px;
+	color: #fff;
+	font: normal bolder 16px/36px "微软雅黑";
+	background-color: orange;
+	padding: 0 10px;
+	text-decoration: none;
+}
+.discount .title span{
+	float: right;
+}
+.discount .title span img{
+	width: 20px;
+	border: 1px solid #999999;
+	border-radius: 10px;
+}
+.discount li>a{
+	display: block;
+	padding: 0 5px;
+	color: #000;
+	font-size: 14px;
+	/*position: relative;*/
+}
+.discount .pic{
+	float: left;
+}
+.discount .pic img{
+	width: 100px;
+	height: 100px;
+	vertical-align: middle;
+}
+.discount .gods{
+	overflow: hidden;
+}
+.discount .gods p{
+	/*position: absolute;
+	top:5px;*/
+	height: 40px;
+}
+.discount .gods p span{
+	color: red;
+}
+.discount .shop{
+	/*position: absolute;
+	bottom:5px;*/
+	margin-top: 30px;
+	font-size: 12px;
+}
+.discount .shop .comment{
+	/*position: absolute;
+	right: 5px;*/
+	float: right;
+}
+.discount .shop .comment i{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url(../images/comment.svg);
+	background-size: cover;
+	vertical-align: middle;
+	
+}
+.more{
+	background-color: #999;
+	padding: 10px;
+	max-width: 100%;
+	height: 50px;
+}
+.more a{
+	width: 100%;
+	height: 30px;
+	display: block;
+	color: #000;
+	text-align: center;
+	line-height: 30px;
+	border: 1px solid #000;
+	background-color: #fff;
+}
+.discount{
+	max-width: 100%;
+	padding: 10px 0;
+}
+.bottom .title{
+	display: block;
+	width: 100%;
+	height: 36px;
+	color: #fff;
+	font: normal bolder 16px/36px "微软雅黑";
+	background-color: orange;
+	padding: 0 10px;
+	text-decoration: none;
+}
+.bottom .title span{
+	float: right;
+}
+.bottom .title span img{
+	width: 20px;
+	border: 1px solid #999999;
+	border-radius: 10px;
+}
+.bottom .foot{
+	width: 100%;
+	margin-top: 5px;
+	height: 34px;
+	border-top: 1px solid #000;
+	border-bottom: 1px solid #000;
+}
+.bottom .foot .login,.bottom .foot .sign{
+	display: block;
+	line-height: 34px;
+	width: 30%;
+	float: left;
+	text-align: center;
+	box-sizing: border-box;
+	border-right: 1px solid #999;
+}
+.bottom .foot .rtop{
+	display: block;
+	line-height: 34px;
+	width: 40%;
+	float: left;
+	text-align: center;
+}
+.bottom .footer p{
+	text-align: center;
+}

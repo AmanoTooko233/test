@@ -1,0 +1,37 @@
+body{
+	min-width: 320px;
+}
+header{
+	background-color: orange !important;
+}
+header .mui.mui-action-back{
+	color: white;	
+}
+header .mui-title{
+	color: white;
+}
+header .download{
+	display: block;
+	float: right;
+	height: 44px;
+	line-height: 44px;
+	}
+header .download img{
+	height: 34px;
+	vertical-align: middle;
+}
+.mui-content .name{
+	font-size: 20px;
+	min-height: 24px;
+	line-height: 24px;
+}
+.mui-content .shop span{
+	margin-right:10px;
+}
+.mui-content img:nth-child(1){
+	float: right;
+	width: 100px;
+}
+.mui-content .mess1{
+	overflow: hidden;
+}

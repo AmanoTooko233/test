@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>manmanmai</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/gods.css" />
+		<script src="lib2/jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			document.addEventListener('plusready', function() {
+				//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+
+			});
+		</script>
+	</head>
+
+	<body>
+		<header>
+			<div class="logoleft">
+				<a href="#"><img src="images/header_logo.png" /></a>
+			</div>
+			<div class="logoright">
+				<a href="#"><img src="images/header_app.png" /></a>
+			</div>
+		</header>
+		<div class='serach'>
+			<input type="text" placeholder="请输入你想比价的商品" />
+			<a href="#">搜索</a>
+		</div>
+		<nav class="nav">
+			<a href="index.html">首页</a>&gt;
+		</nav>
+		<div class="content">
+			
+		</div>
+		<ul class="tab clearfix">
+			<li><a href="javascript:;" class="active">比价购买</a></li>
+			<li><a href="javascript:;" class="product">产品参数</a></li>
+			<li><a href="javascript:;" class="com">评论（xxxx）</a></li>
+		</ul>
+		<div class="bjShop"></div>
+		
+		<div class="discuss">
+			<div class="distit">网友评论</div>
+			<ul class="ul">
+				<!--<li>
+					<div class="clearfix"><div class="name">name</div><div class="time">time</div></div>
+					<p class="shop">购买</p>
+					<p class="com">xxxx</p>
+				</li>-->
+			</ul>
+		</div>
+		
+		
+		<div class="bottom">
+			<div class='foot'>
+				<a href="#" class="login">登录</a>
+				<a href="#" class="sign">注册</a>
+				<a href="#" class="rtop">
+					<img src="http://www.zuyushop.com/wap/images/top.jpg" width="15" height="15"> 返回顶部
+				</a>
+			</div>
+			<div class="footer">
+				<p>
+					<a href="http://m.manmanbuy.com/?o=download" . style="color: Red;">手机APP下载</a>
+					<a href="http://m.manmanbuy.com">
+						慢慢买手机版</a> -- 掌上比价平台</p>
+				<p>
+					m.manmanbuy.com
+					<img src="http://c.cnzz.com/wapstat.php?siteid=1256699064&amp;r=&amp;rnd=25222501" width="0" height="0">
+				</p>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			var category=urlGet('category');
+			var productId=urlGet('productId');
+			var categoryId=urlGet('categoryId')
+			var a='<a href="list.html?categoryId='+categoryId+'&category='+category+'">'+decodeURI(category)+'</a>>'
+			$('.nav').append($(a));
+			
+			$.get('http://127.0.0.1:3000/api/getproduct?productid='+productId,function(data){
+				var message=(data.result)[0];
+				console.log(message)
+				var res=
+				'<h3 id="">'+message.productName+'</h3>'+
+				message.productImg+
+				'<a href="#">收藏</a>'
+				$('.content').append($(res));
+				$('.bjShop').append(message.bjShop);
+				var a='<a href="#">'+message.productName.split(' ')[0]+'</a>&gt;'
+				$('.nav').append($(a));
+			});
+			$.get('http://127.0.0.1:3000/api/getproductcom?productid='+productId,function(data){
+				console.log(data);
+				var result=data.result;
+				$('.com').html('评论('+result.length+')');
+				$.each(result, function(i,v) {
+					var res=
+						'<li>'+
+						'<div class="clearfix"><div class="name">'+v.comName+'</div><div class="time">'+v.comTime+'</div></div>'+
+						'<p class="shop">'+v.comFrom+'</p>'+
+						'<p class="com">'+v.comContent+'</p>'+
+						'</li>'
+					$('.ul').append($(res));	
+				});
+			})
+			
+			
+			
+			$('.rtop').on('click', function() {
+				$('body').animate({
+					scrollTop: 0
+				}, 1000)
+			})
+		})
+
+		function urlGet(key) {
+			var aQuery = window.location.href.split("?"); //取得Get参数
+			var aGET = new Object();
+			if(aQuery.length > 1) {
+				var aBuf = aQuery[1].split("&");
+				for(var i = 0, iLoop = aBuf.length; i < iLoop; i++) {
+					var aTmp = aBuf[i].split("="); //分离key与Value
+					aGET[aTmp[0]] = aTmp[1];
+				}
+			}
+			return aGET[key];
+		}
+	</script>
+
+</html>

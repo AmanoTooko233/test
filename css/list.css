@@ -1,0 +1,39 @@
+.nav{
+	font-size: 14px;
+	
+}
+.nav a{
+	color: black;
+}
+.content{
+	padding: 5px;
+}
+.content li a{
+	display: block;
+	color: #333;
+	font-size: 14px;
+	
+}
+
+.content img{
+	display: block;
+	float: left;
+	width: 100px;
+	height: 100px;
+}
+.content .gods{
+	overflow: hidden;
+}
+.content .gods p{
+	margin-bottom: 10px;
+}
+.content .gods .tit{
+	word-break:break-all;
+}
+.content .gods .price{
+	color: #f00;
+}
+.content .gods .other{
+	color: #999;
+	font-size: 12px;
+}

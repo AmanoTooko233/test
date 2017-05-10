@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>manmanmai</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <script src="lib2/jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript">
+    	
+   		document.addEventListener('plusready', function(){
+   			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+   			
+   		});
+   		
+    </script>
+</head>
+<body>
+	<header>
+		<div class="logoleft">
+			<a href="#"><img src="images/header_logo.png"/></a>
+		</div>
+		<div class="logoright">
+			<a href="#"><img src="images/header_app.png"/></a>
+		</div>
+	</header>
+	<div class='serach'>
+		<input type="text" placeholder="请输入你想比价的商品"/>
+		<a href="#">搜索</a>
+	</div>
+	<div class="menu clearfix">
+	</div>
+	<div class="discount">
+		<a class="title" href="moneyctrl.html">超级折扣推荐<span><img src="images/arrow-right.svg"/></span></a>
+		<ul>
+		</ul>
+		<div class="more">
+			<a href="#">更多优惠信息 »</a>
+		</div>
+	</div>
+	<div class="bottom">
+		<a class="title" href="#">品牌排行<span><img src="images/arrow-right.svg"/></span></a>
+		<div class='foot'>
+			<a href="#" class="login">登录</a>
+			<a href="#" class="sign">注册</a>
+			<a href="#" class="rtop">
+				<img src="http://www.zuyushop.com/wap/images/top.jpg" width="15" height="15">
+				返回顶部</a>
+		</div>
+		<div class="footer">
+            <p>
+                <a href="http://m.manmanbuy.com/?o=download" . style="color: Red;">手机APP下载</a> <a href="http://m.manmanbuy.com">
+                    慢慢买手机版</a> -- 掌上比价平台</p>
+            <p>
+                m.manmanbuy.com  
+<img src="http://c.cnzz.com/wapstat.php?siteid=1256699064&amp;r=&amp;rnd=25222501" width="0" height="0">
+            </p>
+        </div>
+	</div>
+	
+	
+</body>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$.ajax({
+			type:"get",
+			url:"http://127.0.0.1:3000/api/getindexmenu",
+			dataType:'jsonp',
+			success:function(data){
+				var result=data.result;
+				var res="";
+				$(result).each(function(i,v){
+					if(i<=7){
+						res+=
+					'<div class="item">'+
+						'<a href="'+v.titlehref+'">'+
+						v.img+
+						'<div class="name">'+v.name+'</div>'+
+						'</a>'+
+					'</div>';
+					}else{
+							res+=
+					'<div class="item" style="display:none">'+
+						'<a href="'+v.titlehref+'">'+
+						v.img+
+						'<div class="name">'+v.name+'</div>'+
+						'</a>'+
+					'</div>';
+					}
+				})
+				$('.menu').html(res);
+			}
+		});
+		//
+		$('.menu').on('click','.item:eq(7)',function(){
+			$(this).nextAll().show();
+		});
+		
+		$.get("http://127.0.0.1:3000/api/getmoneyctrl",function(data){
+			var result=data.result;
+			var res="";
+			$(result).each(function(i,v){
+				res+=
+					'<li>'+
+						'<a href="#" class=clearfix>'+
+							'<div class="pic">'+
+								v.productImgSm+
+							'</div>'+
+							'<div class="gods">'+
+								'<p>'+v.productName+'<span>'+v.productPinkage+'</span></p>'+
+								'<div class="shop">'+
+								'<span class="tmall">'+v.productFrom+ '|'+v.productTime+'</span>'+
+								'<span class="comment"><i></i>'+v.productComCount+'</span>'+
+								'</div>'+
+							'</div>'+
+						'</a>'+
+					'</li>';
+			})
+			$('.discount>ul').html(res);
+		})
+		
+		$('.rtop').on('click',function(){
+			$('body').animate({scrollTop:0},1000)
+		})
+	});
+</script>
+</html>
