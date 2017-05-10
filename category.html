@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>manmanmai</title>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <link rel="stylesheet" type="text/css" href="css/bijia.css"/>
+    <script src="lib2/jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+    
+    <script type="text/javascript">
+    	
+   		document.addEventListener('plusready', function(){
+   			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+   			
+   		});
+   		
+    </script>
+</head>
+<body>
+	<header>
+		<div class="logoleft">
+			<a href="#"><img src="images/header_logo.png"/></a>
+		</div>
+		<div class="logoright">
+			<a href="#"><img src="images/header_app.png"/></a>
+		</div>
+	</header>
+	<div class='serach'>
+		<input type="text" placeholder="请输入你想比价的商品"/>
+		<a href="#">搜索</a>
+	</div>
+	<div class="outconcent">
+		<div class="innerconcent">
+			<!--<div class="f_t">
+				<a href="#" class="title">大家电<span>V</span></a>
+			</div>
+			<ul class="utable clearfix">
+				<li><a href="#">电视</a></li>
+				
+			</ul>-->
+		</div>
+		
+		
+	</div>
+	
+	
+	
+	
+	<div class="bottom">
+		<div class='foot'>
+			<a href="#" class="login">登录</a>
+			<a href="#" class="sign">注册</a>
+			<a href="#" class="rtop">
+				<img src="http://www.zuyushop.com/wap/images/top.jpg" width="15" height="15">
+				返回顶部</a>
+		</div>
+		<div class="footer">
+            <p>
+                <a href="http://m.manmanbuy.com/?o=download" . style="color: Red;">手机APP下载</a> <a href="http://m.manmanbuy.com">
+                    慢慢买手机版</a> -- 掌上比价平台</p>
+            <p>
+                m.manmanbuy.com  
+<img src="http://c.cnzz.com/wapstat.php?siteid=1256699064&amp;r=&amp;rnd=25222501" width="0" height="0">
+            </p>
+        </div>
+	</div>
+	
+	
+</body>
+<script type="text/javascript">
+		$(function(){
+			$.get('http://127.0.0.1:3000/api/getcategorytitle',function(data){
+				var res=data.result;
+				var tep='';
+				$.each(res, function(i,v) {
+					tep+=
+					'<div class="f_t">'+
+						'<a href="javascript:void(0)" class="title">'+v.title+'<span>V</span></a>'+
+					'</div>';
+					$.ajax({
+						type:"get",
+						url:'http://127.0.0.1:3000/api/getcategory?titleid='+i,
+						async:false,
+						success:function(data){
+							tep+=
+							'<ul class="utable clearfix">';
+							$.each(data.result, function(i,v) {
+								tep+=
+								'<li><a href="list.html?categoryId='+v.categoryId+'&category='+encodeURI(v.category)+'">'+v.category+'</a></li>';
+							});
+							tep+='</ul>';
+						}
+					});
+
+				});
+				$('.innerconcent').html(tep)
+			})
+			
+			$('.innerconcent').on('click','.title',function(){
+				if($(this).parent().next('ul').css('display')=='none'){
+					$(this).children('span').css('transform','rotate(0)');
+					$(this).parent().siblings('.f_t').find('span').css('transform','rotate(180deg)');
+					$(this).parent().siblings('ul').hide();
+					$(this).parent().next('ul').show();
+				}else{
+					$(this).children('span').css('transform','rotate(180deg)');
+					$(this).parent().next('ul').hide();
+				}
+			})
+			
+			
+			
+			
+			
+			
+			
+			
+			$('.rtop').on('click',function(){
+			$('body').animate({scrollTop:0},1000)
+			})
+		})
+		 
+		
+		
+</script>
+</html>

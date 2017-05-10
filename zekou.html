@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" />
+		<link href="css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="css/zekou.css" />
+		<script src="js/mui.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+		    <h1 class="mui-title">国内折扣</h1>
+		    <a href="#" class="download"><img src="images/header_app.png" /></a>
+		</header>
+		<div class="mui-content">
+		    <h2 class="name">RIWA 雷瓦 T5 2档家用大功率电吹风2200W</h2>
+		    <p class="shop"><span>京东商城</span><span>10-25 14:10</span><span>小编烟火 / 慢慢买</span></p>
+		    <div class="mui-clearfix">
+		    	<img src="images/arrow-right.svg"/>
+		    	<p class="mess1">海天的金标生抽酱油，采用了非转基因大豆以及小麦发酵而成，而自然鲜的口感是有些鲜甜鲜甜的感觉，非常适合用来作为日常炒菜用的调味料，当然也能用作白切系列的蘸酱调料，相信吃过美味鲜的慢友们都了解的。</p>
+		    </div>
+		    <p class="mess2">目前京东商城移动端售价10.9元，不错的凑单品，刚需可入，规格1.28L。</p>
+		    <img src="images/arrow-right.svg"/>
+		</div>
+	</body>
+	<script type="text/javascript">
+		mui.ready(function(){
+			var productid=urlGet('productid');
+			mui.getJSON('http://127.0.0.1:3000/api/getmoneyctrlproduct',{productid:productid},function(data){
+				var result=data.result;
+				mui.each(result,function(i,v){
+					var res=
+					
+					'<h2 class="name">'+v.productName+'</h2>'+
+		   			'<p class="shop">'+v.productFrom   productTime  productTips</p>
+		   			<p class="mess1">productInfo</p>
+		   			 productImgSm
+		    		<p class="mess2">productInfo1</p>
+		   			 productImgLg
+				})
+			})
+		})
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		function urlGet(key) {
+			var aQuery = window.location.href.split("?"); //取得Get参数
+			var aGET = new Object();
+			if(aQuery.length > 1) {
+				var aBuf = aQuery[1].split("&");
+				for(var i = 0, iLoop = aBuf.length; i < iLoop; i++) {
+					var aTmp = aBuf[i].split("="); //分离key与Value
+					aGET[aTmp[0]] = aTmp[1];
+				}
+			}
+			return aGET[key];
+		}
+	</script>
+</html>

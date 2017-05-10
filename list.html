@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<title>manmanmai</title>
+		<link rel="stylesheet" type="text/css" href="css/index.css" />
+		<link rel="stylesheet" type="text/css" href="css/list.css" />
+		<script src="lib2/jquery/jquery.js" type="text/javascript" charset="utf-8"></script>
+
+		<script type="text/javascript">
+			document.addEventListener('plusready', function() {
+				//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
+
+			});
+		</script>
+	</head>
+
+	<body>
+		<header>
+			<div class="logoleft">
+				<a href="#"><img src="images/header_logo.png" /></a>
+			</div>
+			<div class="logoright">
+				<a href="#"><img src="images/header_app.png" /></a>
+			</div>
+		</header>
+		<div class='serach'>
+			<input type="text" placeholder="请输入你想比价的商品" />
+			<a href="#">搜索</a>
+		</div>
+		<nav class="nav">
+			<a href="index.html">首页</a>&gt;
+			<a href="category.html">全部分类</a>&gt;
+		</nav>
+		<ul class="content">
+			<!--<li>
+				<a class="clearfix" href="#">
+					<img src="images/arrow-right.svg" />
+					<div class="gods">
+						<p class="tit">乐事薯片xxsssssssssssssssssssssssssssssssssssssssssssxxxxx</p>
+						<p class="price">￥1999</p>
+						<p class="other">报价(6) 评论(10)</p>
+					</div>
+				</a>
+			</li>-->
+		</ul>
+		<div class="bottom">
+			<div class='foot'>
+				<a href="#" class="login">登录</a>
+				<a href="#" class="sign">注册</a>
+				<a href="#" class="rtop">
+					<img src="http://www.zuyushop.com/wap/images/top.jpg" width="15" height="15"> 返回顶部
+				</a>
+			</div>
+			<div class="footer">
+				<p>
+					<a href="http://m.manmanbuy.com/?o=download" . style="color: Red;">手机APP下载</a>
+					<a href="http://m.manmanbuy.com">
+						慢慢买手机版</a> -- 掌上比价平台</p>
+				<p>
+					m.manmanbuy.com
+					<img src="http://c.cnzz.com/wapstat.php?siteid=1256699064&amp;r=&amp;rnd=25222501" width="0" height="0">
+				</p>
+			</div>
+		</div>
+
+	</body>
+	<script type="text/javascript">
+		$(function() {
+			var categoryId=urlGet('categoryId');
+			var category=urlGet('category');
+			var a='<a href="#">'+decodeURI(category)+'</a>;'
+			$('.nav').append($(a));
+			var pageid=1;
+			var page;
+			function res(pageid){
+					$.get('http://127.0.0.1:3000/api/getproductlist?categoryid='+categoryId+'&pageid='+pageid,function(data){
+					var result=data.result;
+//					console.log(result)
+					page=Math.ceil(result.totalCount/result.pagesize);
+					$.each(result, function(i,v) {
+//						console.log(v.productName)
+						var li=
+						'<li>'+
+							'<a class="clearfix" href="gods.html?productId='+v.productId+'&category='+category+'&categoryId='+categoryId+'">'+
+								v.productImg+
+								'<div class="gods">'+
+									'<p class="tit">'+v.productName+'</p>'+
+									'<p class="price">'+v.productPrice+'</p>'+
+									'<p class="other">'+v.productQuote+'&nbsp;'+v.productCom+'</p>'+
+								'</div>'+
+							'</a>'+
+						'</li>';
+						$('.content').append($(li));
+					});
+				})
+			}
+			res(pageid);
+			$(window).scroll(function(){
+				var scrolltop=$(window).scrollTop();
+				if($(document).height()-$('.bottom').height()<=$(window).height()+scrolltop){
+					pageid++;
+					console.log(pageid)
+					res(pageid);
+				}
+			})
+			
+			$('.rtop').on('click', function() {
+				$('body').animate({
+					scrollTop: 0
+				}, 1000)
+			})
+		})
+
+		function urlGet(key) {
+			var aQuery = window.location.href.split("?"); //取得Get参数
+			var aGET = new Object();
+			if(aQuery.length > 1) {
+				var aBuf = aQuery[1].split("&");
+				for(var i = 0, iLoop = aBuf.length; i < iLoop; i++) {
+					var aTmp = aBuf[i].split("="); //分离key与Value
+					aGET[aTmp[0]] = aTmp[1];
+				}
+			}
+			return aGET[key];
+		}
+	</script>
+
+</html>
